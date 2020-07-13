@@ -15,13 +15,15 @@ public class Main {
         // Scanner input;
         // input = new Scanner(System.in);
         TicTacToe game = new TicTacToe();
-        while (game.isGameWon() != true)
+        while (game.isGameWon() == false &&
+               game.isBoardFull() == false)
         {
           Scanner input;
           input = new Scanner(System.in);
           game.printBoard();
           System.out.printf("Move? ");
-          input.nextLine();
+          String move = input.nextLine();
+          game.markCoordinates(move);
         }
     }
 }
@@ -49,11 +51,11 @@ class TicTacToe {
         {
           if(board[i][j] != 'N')
           {
-            return true;
+            return false;
           }
         }
       }
-      return false;
+      return true;
     }
 
     public boolean markCoordinates(String line) {
@@ -77,14 +79,35 @@ class TicTacToe {
         
         for (int i = 0; i < board.length; i++) {
             // check rows 
-            if ((board[0][i] == board[1][i]) && (board[1][i] == board[2][i])) rowsWon = true;
+            if ((board[0][i] == board[1][i]) && 
+                (board[1][i] == board[2][i]) && 
+                (board[2][i] == currentPlayer))
+            {  
+              rowsWon = true;
+            }
             // check cols 
-            if ((board[i][0] == board[i][1]) && (board[i][1] == board[i][2])) colsWon = true;
+            if ((board[i][0] == board[i][1]) && 
+                (board[i][1] == board[i][2]) && 
+                (board[i][2] == currentPlayer))
+            {
+               colsWon = true;
+            }
         }
         
         // check diag
-        if((board[0][0] == board[1][1]) && (board[1][1] == board[2][2])) diagWon = true;
-        if((board[0][2] == board[1][1]) && (board[1][1] == board[2][0])) diagWon = true;
+        if((board[0][0] == board[1][1]) && 
+           (board[1][1] == board[2][2]) && 
+           (board[2][2] == currentPlayer)) 
+        {
+          diagWon = true;
+        }
+
+        if((board[0][2] == board[1][1]) && 
+           (board[1][1] == board[2][0]) && 
+           (board[2][0] == currentPlayer))
+        {
+          diagWon = true;
+        } 
         return rowsWon && colsWon && diagWon;
     }
 }
