@@ -1,3 +1,5 @@
+package olc;
+
 import java.util.Scanner;
 
 /**
@@ -10,25 +12,9 @@ import java.util.Scanner;
     - executing input.nextLine(); in the main function will read input from the console
  */
 
-public class Main {
-    public static void main(String[] args) {
-        // Scanner input;
-        // input = new Scanner(System.in);
-        TicTacToe game = new TicTacToe();
-        while (game.isGameWon() == false &&
-               game.isBoardFull() == false)
-        {
-          Scanner input;
-          input = new Scanner(System.in);
-          game.printBoard();
-          System.out.printf("Move? ");
-          String move = input.nextLine();
-          game.markCoordinates(move);
-        }
-    }
-}
 
-class TicTacToe {
+
+public class TicTacToe {
     private char board[][] = {{'N', 'N', 'N'}, {'N', 'N', 'N'}, {'N', 'N', 'N'}};
     private char currentPlayer = 'X';
     
