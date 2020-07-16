@@ -17,7 +17,12 @@ import java.util.Scanner;
 public class TicTacToe {
     private char board[][] = {{'N', 'N', 'N'}, {'N', 'N', 'N'}, {'N', 'N', 'N'}};
     private char currentPlayer = 'X';
-    
+
+    public char getCurrentPlayer()
+    {
+        return currentPlayer;
+    }
+
     public void printBoard() {
       for(int i = 0; i < 3; i++)
       {
@@ -30,18 +35,25 @@ public class TicTacToe {
       System.out.printf("\n");
     }
 
-    public boolean isBoardFull() {
-      for(int i = 0; i < 3; i++)
-      {
-        for(int j = 0; j < 3; j++)
+    public boolean isBoardFull()
+    {
+        int count = 0;
+        for(int i = 0; i < 3; i++)
         {
-          if(board[i][j] != 'N')
-          {
-            return false;
-          }
+            for(int j = 0; j < 3; j++)
+            {
+                if(board[i][j] == 'X' || board[i][j] == 'O')
+                {
+                    count++;
+                }
+            }
         }
-      }
-      return true;
+
+        if (count == 9)
+        {
+            return true;
+        }
+        return false;
     }
 
     public boolean markCoordinates(String line) {
@@ -53,6 +65,14 @@ public class TicTacToe {
       if( value == 'N' )
       {
         board[i][j] = currentPlayer;
+        if (currentPlayer == 'X')
+        {
+            currentPlayer = 'O';
+        }
+        else
+        {
+            currentPlayer = 'X';
+        }
         return true;
       }
 

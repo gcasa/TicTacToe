@@ -6,15 +6,16 @@ public class Main {
         // Scanner input;
         // input = new Scanner(System.in);
         TicTacToe game = new TicTacToe();
-        while (game.isGameWon() == false &&
-                game.isBoardFull() == false)
+         // game.isGameWon() == false && game.isBoardFull() == false)
+        do
         {
             Scanner input;
             input = new Scanner(System.in);
             game.printBoard();
-            System.out.printf("Move? ");
+            System.out.printf("%c's Move? ", game.getCurrentPlayer());
             String move = input.nextLine();
             game.markCoordinates(move);
         }
+        while (game.isBoardFull() == false);
     }
 }
