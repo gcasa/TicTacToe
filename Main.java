@@ -15,6 +15,15 @@ public class Main {
             System.out.printf("%c's Move? ", game.getCurrentPlayer());
             String move = input.nextLine();
             game.markCoordinates(move);
+            if (game.isGameWon())
+            {
+                System.out.printf("%c has won!\n", game.getCurrentPlayer());
+                break;
+            }
+            else
+            {
+                game.alternatePlayer();
+            }
         }
         while (game.isBoardFull() == false);
     }

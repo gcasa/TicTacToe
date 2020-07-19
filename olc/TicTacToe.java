@@ -12,10 +12,12 @@ import java.util.Scanner;
     - executing input.nextLine(); in the main function will read input from the console
  */
 
-
-
 public class TicTacToe {
-    private char board[][] = {{'N', 'N', 'N'}, {'N', 'N', 'N'}, {'N', 'N', 'N'}};
+    private char board[][] = {
+            {'N', 'N', 'N'},
+            {'N', 'N', 'N'},
+            {'N', 'N', 'N'}};
+
     private char currentPlayer = 'X';
 
     public char getCurrentPlayer()
@@ -35,8 +37,7 @@ public class TicTacToe {
       System.out.printf("\n");
     }
 
-    public boolean isBoardFull()
-    {
+    public boolean isBoardFull() {
         int count = 0;
         for(int i = 0; i < 3; i++)
         {
@@ -48,23 +49,32 @@ public class TicTacToe {
                 }
             }
         }
-
-        if (count == 9)
-        {
-            return true;
-        }
-        return false;
+        return count == 9;
     }
 
     public boolean markCoordinates(String line) {
       String[] coords = line.split(",");
       int i = Integer.parseInt(coords[0]);
       int j = Integer.parseInt(coords[1]);
-      char value = board[i][j];
 
+      // Check range...
+      if (i > 2 || j > 2 || i < 0 || j < 0)
+      {
+          System.out.println("Out of range");
+          return false;
+      }
+
+      // Check the board...
+      char value = board[i][j];
       if( value == 'N' )
       {
         board[i][j] = currentPlayer;
+        return true;
+      }
+      return false;
+    }
+
+    public void alternatePlayer() {
         if (currentPlayer == 'X')
         {
             currentPlayer = 'O';
@@ -73,28 +83,23 @@ public class TicTacToe {
         {
             currentPlayer = 'X';
         }
-        return true;
-      }
-
-      return false;
     }
 
     public boolean isGameWon() {
-        boolean rowsWon, colsWon, diagWon;
+        boolean rowsWon = false, colsWon = false, diagWon = false;
+
         rowsWon = colsWon = diagWon = false;
-        
         for (int i = 0; i < board.length; i++) {
             // check rows 
             if ((board[0][i] == board[1][i]) && 
-                (board[1][i] == board[2][i]) && 
+                (board[1][i] == board[2][i]) &&
                 (board[2][i] == currentPlayer))
             {  
               rowsWon = true;
             }
             // check cols 
             if ((board[i][0] == board[i][1]) && 
-                (board[i][1] == board[i][2]) && 
-                (board[i][2] == currentPlayer))
+                (board[i][1] == board[i][2]))
             {
                colsWon = true;
             }
@@ -102,18 +107,18 @@ public class TicTacToe {
         
         // check diag
         if((board[0][0] == board[1][1]) && 
-           (board[1][1] == board[2][2]) && 
-           (board[2][2] == currentPlayer)) 
+           (board[1][1] == board[2][2]))
         {
           diagWon = true;
         }
 
         if((board[0][2] == board[1][1]) && 
-           (board[1][1] == board[2][0]) && 
-           (board[2][0] == currentPlayer))
+           (board[1][1] == board[2][0]))
         {
           diagWon = true;
-        } 
-        return rowsWon && colsWon && diagWon;
+        }
+
+        System.out.printf("%b, %b, %b\n", rowsWon, colsWon, diagWon);
+        return rowsWon || colsWon || diagWon;
     }
 }
