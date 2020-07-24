@@ -20,6 +20,6 @@ public class Main {
             {
                 game.alternatePlayer();
             }
-        } while (game.isBoardFull() == false);
+        } while (!game.isBoardFull());
     }
 }
