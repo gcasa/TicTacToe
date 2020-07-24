@@ -4,8 +4,7 @@ import olc.TicTacToe;
 public class Main {
     public static void main(String[] args) {
         TicTacToe game = new TicTacToe();
-        do
-        {
+        do  {
             Scanner input;
             input = new Scanner(System.in);
             game.printBoard();
@@ -21,7 +20,6 @@ public class Main {
             {
                 game.alternatePlayer();
             }
-        }
-        while (game.isBoardFull() == false);
+        } while (game.isBoardFull() == false);
     }
 }
