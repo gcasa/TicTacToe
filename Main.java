@@ -3,10 +3,7 @@ import olc.TicTacToe;
 
 public class Main {
     public static void main(String[] args) {
-        // Scanner input;
-        // input = new Scanner(System.in);
         TicTacToe game = new TicTacToe();
-         // game.isGameWon() == false && game.isBoardFull() == false)
         do
         {
             Scanner input;
