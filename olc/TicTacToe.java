@@ -86,39 +86,40 @@ public class TicTacToe {
     }
 
     public boolean isGameWon() {
-        boolean rowsWon = false, colsWon = false, diagWon = false;
-
-        rowsWon = colsWon = diagWon = false;
         for (int i = 0; i < board.length; i++) {
             // check rows 
-            if ((board[0][i] == board[1][i]) && 
-                (board[1][i] == board[2][i]) &&
-                (board[2][i] == currentPlayer))
-            {  
-              rowsWon = true;
+            if ((board[0][i] == board[1][i]) &&
+                    (board[1][i] == board[2][i]) &&
+                    (board[2][i] == currentPlayer)) {
+                return true;
             }
+        }
+
+        for (int i = 0; i < board.length; i++) {
             // check cols 
             if ((board[i][0] == board[i][1]) && 
-                (board[i][1] == board[i][2]))
+                (board[i][1] == board[i][2]) &&
+                    (board[i][2] == currentPlayer))
             {
-               colsWon = true;
+                return true;
             }
         }
-        
+
         // check diag
         if((board[0][0] == board[1][1]) && 
-           (board[1][1] == board[2][2]))
+           (board[1][1] == board[2][2]) &&
+                (board[2][2] == currentPlayer))
         {
-          diagWon = true;
+            return true;
         }
 
-        if((board[0][2] == board[1][1]) && 
-           (board[1][1] == board[2][0]))
+        if((board[0][2] == board[1][1]) &&
+           (board[1][1] == board[2][0]) &&
+            (board[2][0] == currentPlayer))
         {
-          diagWon = true;
+            return true;
         }
 
-        System.out.printf("%b, %b, %b\n", rowsWon, colsWon, diagWon);
-        return rowsWon || colsWon || diagWon;
+        return false;
     }
 }
